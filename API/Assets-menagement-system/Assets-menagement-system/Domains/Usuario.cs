@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Assets_menagement_system.Domains;
+
+public partial class Usuario
+{
+    public Guid UsuarioId { get; set; }
+
+    public string NIF { get; set; } = null!;
+
+    public string NomeUsuario { get; set; } = null!;
+
+    public string RG { get; set; } = null!;
+
+    public string CPF { get; set; } = null!;
+
+    public string? CarteiraDeTabalho { get; set; }
+
+    public byte[]? Senha { get; set; }
+
+    public string Email { get; set; } = null!;
+
+    public bool? StatusUsuario { get; set; }
+
+    public Guid EnderecoId { get; set; }
+
+    public virtual Endereco Endereco { get; set; } = null!;
+
+    public virtual ICollection<Log_Patrimonio> Log_Patrimonio { get; set; } = new List<Log_Patrimonio>();
+
+    public virtual ICollection<SolicitacaoTranferencia> SolicitacaoTranferenciaUsuarioAprovacao { get; set; } = new List<SolicitacaoTranferencia>();
+
+    public virtual ICollection<SolicitacaoTranferencia> SolicitacaoTranferenciaUsuarioSolicitacao { get; set; } = new List<SolicitacaoTranferencia>();
+}
