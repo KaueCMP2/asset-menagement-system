@@ -82,7 +82,7 @@ CREATE TABLE Localizacao
 (
 	LocalizacaoId			UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
 	NomeLocal				VARCHAR(100),
-	LocalSAP				INT NOT NULL,
+	LocalSAP				INT,
 	DescricaoSAP			VARCHAR(100),
 	StatusLocalizacao		BIT DEFAULT 1,
 	AreaId					UNIQUEIDENTIFIER,
@@ -91,6 +91,9 @@ CREATE TABLE Localizacao
 		FOREIGN KEY (AreaId) REFERENCES Area(AreaId)
 )
 GO
+
+ALTER TABLE Localizacao
+ALTER COLUMN LocalSap INT NULL
 
 CREATE TABLE TipoPatrimonio
 (
