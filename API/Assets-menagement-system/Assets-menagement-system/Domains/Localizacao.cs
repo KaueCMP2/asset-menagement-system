@@ -9,7 +9,7 @@ public partial class Localizacao
 
     public string? NomeLocal { get; set; }
 
-    public int LocalSAP { get; set; }
+    public int? LocalSAP { get; set; }
 
     public string? DescricaoSAP { get; set; }
 

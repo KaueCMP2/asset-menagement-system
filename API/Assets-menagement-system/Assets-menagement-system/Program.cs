@@ -1,4 +1,7 @@
+using Assets_menagement_system.Application.Services;
 using Assets_menagement_system.Contexts;
+using Assets_menagement_system.Interfaces;
+using Assets_menagement_system.Repositories;
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +18,13 @@ builder.Services.AddDbContext<AssetMenagementDbContext>(options =>
     options.UseSqlServer(connectionString)
 );
 
+// Areas
+builder.Services.AddScoped<IAreaRepository, AreaRepository>();
+builder.Services.AddScoped<AreaService>();
+
+// Localizacao
+builder.Services.AddScoped<ILocalizacaoRepository, LocalizacaoRepository>();
+builder.Services.AddScoped<LocalizacaoService>();
 
 // Add services to the container.
 

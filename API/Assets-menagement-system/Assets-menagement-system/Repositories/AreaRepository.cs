@@ -21,5 +21,29 @@ namespace Assets_menagement_system.Repositories
         {
             return ctx.Area.FirstOrDefault(a => a.AreaId == guid);
         }
+        public Area ObterPorNome(string nome)
+        {
+            return ctx.Area.FirstOrDefault(a => a.NomeArea == nome);
+        }
+
+
+        public void Adicionar(Area area)
+        {
+            ctx.Area.Add(area);
+            ctx.SaveChanges();
+        }
+
+        public void Atualizar(Area area)
+        {
+            if (area == null)
+                return;
+
+            Area areaBanco = ctx.Area.FirstOrDefault(a => a.AreaId == area.AreaId);
+
+            areaBanco.NomeArea = area.NomeArea;
+
+            ctx.Area.Update(area);
+            ctx.SaveChanges();
+        }
     }
 }
