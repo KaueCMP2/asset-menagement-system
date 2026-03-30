@@ -42,9 +42,9 @@ namespace Assets_menagement_system.Application.Services
             return localizacoesDTO;
         }
 
-        public ListarLocalizacaoDTO ObterPorNome(string nome)
+        public ListarLocalizacaoDTO ObterPorNome(string nome, Guid guid)
         {
-            Localizacao localizacoes = _repository.ObterPorNome(nome);
+            Localizacao localizacoes = _repository.ObterPorNome(nome, guid);
             ListarLocalizacaoDTO localizacoesDTO = new ListarLocalizacaoDTO
             {
                 LocalizacaoId = localizacoes.LocalizacaoId,
@@ -58,11 +58,11 @@ namespace Assets_menagement_system.Application.Services
 
         public void Adicionar(CriarLocalizacaoDTO localizacaoDTO)
         {
-            Localizacao localizacao = _repository.ObterPorNome(localizacaoDTO.NomeLocal);
+            Localizacao localizacao = _repository.ObterPorNome(localizacaoDTO.NomeLocal, (Guid)localizacaoDTO.AreaId);
             if (localizacao != null)
                 throw new DomainException("Já existe uma Localização com esse nome!");
 
-            if (_repository.AreaExiste(localizacaoDTO.AreaId) == false)
+            if (_repository.AreaExiste((Guid)localizacaoDTO.AreaId) == false)
                 throw new DomainException("Area não encontrada!");
 
             Localizacao localizacaoCriada = new Localizacao

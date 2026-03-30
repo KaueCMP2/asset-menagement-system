@@ -6,46 +6,50 @@ namespace Assets_menagement_system.Repositories
 {
     public class LocalizacaoRepository : ILocalizacaoRepository
     {
-        private readonly AssetMenagementDbContext ctx;
+        private readonly AssetMenagementDbContext _ctx;
 
         public LocalizacaoRepository(AssetMenagementDbContext _context)
         {
-            ctx = _context;
+            _ctx = _context;
         }
 
         // C#
         public List<Localizacao> Listar()
         {
-            return ctx.Localizacao
+            return _ctx.Localizacao
                       .OrderBy(loc => loc.NomeLocal)
                       .ToList();
         }
         public Localizacao ObterPorId(Guid guid)
         {
-            return ctx.Localizacao.Find(guid);
+            return _ctx.Localizacao.Find(guid);
         }
-        public Localizacao ObterPorNome(string nome)
+        public Localizacao ObterPorNome(string nome, Guid areaId)
         {
-            return ctx.Localizacao.FirstOrDefault(loc => loc.NomeLocal == nome);
+            return _ctx.Localizacao.FirstOrDefault(loc => loc.NomeLocal == nome && loc.AreaId == areaId);
         }
-        public bool AreaExiste(Guid? guid)
+        public bool LocalExiste(string nome)
         {
-            return ctx.Area.Any(a => a.AreaId == guid);
+            return _ctx.Localizacao.Any(l => l.NomeLocal == nome);
+        }
+        public bool AreaExiste(Guid guid)
+        {
+            return _ctx.Area.Any(a => a.AreaId == guid);
         }
         public void Adicionar(Localizacao localizacao)
         {
-            ctx.Localizacao.Add(localizacao);
-            ctx.SaveChanges();
+            _ctx.Localizacao.Add(localizacao);
+            _ctx.SaveChanges();
         }
         public void Atualizar(Localizacao localizacao)
         {
             if (localizacao == null)
                 return;
 
-            Localizacao locBanco = ctx.Localizacao.FirstOrDefault(loc => loc.LocalizacaoId == localizacao.LocalizacaoId);
+            Localizacao locBanco = _ctx.Localizacao.FirstOrDefault(loc => loc.LocalizacaoId == localizacao.LocalizacaoId);
 
-            ctx.Localizacao.Update(locBanco);
-            ctx.SaveChanges();
+            _ctx.Localizacao.Update(locBanco);
+            _ctx.SaveChanges();
         }
     }
 }

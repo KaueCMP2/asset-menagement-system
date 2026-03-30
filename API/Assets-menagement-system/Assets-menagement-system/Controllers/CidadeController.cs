@@ -1,6 +1,6 @@
 ﻿using Assets_menagement_system.Application.Services;
-using Assets_menagement_system.DTOs.AreaDTO;
 using Assets_menagement_system.DTOs.Cidade;
+using Assets_menagement_system.DTOs.EnderecoDTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,36 +8,20 @@ namespace Assets_menagement_system.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AreaController : ControllerBase
+    public class CidadeController : ControllerBase
     {
-        private readonly AreaService _service;
-        public AreaController(AreaService service)
+        private readonly CidadeService _service;
+        public CidadeController(CidadeService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public ActionResult<List<ListarAreaDTO>> Listar()
+        public ActionResult<List<LerCidadeDTO>> Listar()
         {
             try
             {
-                List<ListarAreaDTO> areas = _service.Listar();
-                return Ok(areas);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
-        }
-
-        [HttpGet("{guid}")]
-
-        public ActionResult<ListarAreaDTO> ObterPorId(Guid guid)
-        {
-            try
-            {
-                ListarAreaDTO area = _service.ObterPorId(guid);
-                return Ok(area);
+                return Ok(_service.Listar());
             }
             catch (Exception ex)
             {
@@ -45,13 +29,27 @@ namespace Assets_menagement_system.Controllers
             }
         }
 
-        [HttpGet("{nome}")]
-        public ActionResult<ListarAreaDTO> ObterPorNome(string nomeArea)
+        [HttpGet("{guid}")]
+        public ActionResult<LerCidadeDTO> ObterPorId(Guid guid)
         {
             try
             {
-                ListarAreaDTO area = _service.ObterPorNome(nomeArea);
-                return Ok(area);
+                LerCidadeDTO cidade = _service.ObterPorId(guid);
+                return Ok(cidade);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("nome/{nome}")]
+        public ActionResult<LerCidadeDTO> ObterPorNome(string nome)
+        {
+            try
+            {
+                LerCidadeDTO cidade = _service.ObterPorNome(nome);
+                return Ok(cidade);
             }
             catch (Exception ex)
             {
@@ -60,12 +58,12 @@ namespace Assets_menagement_system.Controllers
         }
 
         [HttpPost]
-        public ActionResult Adicionar(CriarAreaDTO areaDTO)
+        public ActionResult Adicionar(CriarCidadeDTO cidadeDTO)
         {
             try
             {
-                _service.Adicionar(areaDTO);
-                return Created();
+                _service.Adicionar(cidadeDTO);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -74,12 +72,12 @@ namespace Assets_menagement_system.Controllers
         }
 
         [HttpPut("{guid}")]
-        public ActionResult Atualizar(Guid guid, CriarAreaDTO areaDTO)
+        public ActionResult<LerCidadeDTO> Atualizar(CriarCidadeDTO cidadeDTO, Guid guid)
         {
             try
             {
-                _service.Atualizar(guid, areaDTO);
-                return NoContent();
+                _service.Atualizar(cidadeDTO, guid);
+                return Ok("Cidade atualizada com sucesso");
             }
             catch (Exception ex)
             {

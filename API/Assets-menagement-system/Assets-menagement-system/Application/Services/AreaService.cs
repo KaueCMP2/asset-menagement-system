@@ -36,7 +36,7 @@ namespace Assets_menagement_system.Application.Services
 
 
 
-        public ListarAreaDTO ObterPorGuid(Guid guid)
+        public ListarAreaDTO ObterPorId(Guid guid)
         {
             Area area = _repository.ObterPorId(guid);
             if (area == null)
@@ -49,7 +49,7 @@ namespace Assets_menagement_system.Application.Services
             };
 
             return areaDto;
-        }    
+        }
 
 
         public ListarAreaDTO ObterPorNome(string nomeArea)
@@ -71,21 +71,16 @@ namespace Assets_menagement_system.Application.Services
         {
             ValidarCriacaoDTO.ValidarNome(areaDTO.NomeArea);
 
-            Area areaExistente = _repository.ObterPorNome(areaDTO.NomeArea);
-            if (areaExistente != null)
+            if (_repository.AreaExiste(areaDTO.NomeArea) == true)
                 throw new DomainException("Já existe uma área com este nome");
             Area area = new Area
             {
-                /*
-                 * Caso nosso banco não estivesse com um new id no banco, ela ficaria assim:
-                 AreaId = Guid.NewGuid(),
-                 */
                 NomeArea = areaDTO.NomeArea
             };
             _repository.Adicionar(area);
         }
 
-        public void Atualizar(Guid guid, ListarAreaDTO areaDTO)
+        public void Atualizar(Guid guid, CriarAreaDTO areaDTO)
         {
             ValidarCriacaoDTO.ValidarNome(areaDTO.NomeArea);
             Area areaBanco = _repository.ObterPorId(guid);

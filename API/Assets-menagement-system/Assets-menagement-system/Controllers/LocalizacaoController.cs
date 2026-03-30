@@ -30,9 +30,9 @@ namespace Assets_menagement_system.Controllers
         }
 
         [HttpGet("{nome}")]
-        public ActionResult<ListarLocalizacaoDTO> ObterPorNome(string nome)
+        public ActionResult<ListarLocalizacaoDTO> ObterPorNome(string nome, Guid guid)
         {
-            ListarLocalizacaoDTO localizacao = _service.ObterPorNome(nome);
+            ListarLocalizacaoDTO localizacao = _service.ObterPorNome(nome, guid);
             return localizacao;
         }
 

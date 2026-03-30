@@ -6,8 +6,8 @@ namespace Assets_menagement_system.Interfaces
     {
         public List<Localizacao> Listar();
         public Localizacao ObterPorId(Guid guid);
-        public Localizacao ObterPorNome(string nome);
-        public bool AreaExiste(Guid? guid);
+        public Localizacao ObterPorNome(string nome, Guid guid);
+        public bool AreaExiste(Guid guid);
         public void Adicionar(Localizacao localizacao);
         public void Atualizar(Localizacao localizacao);
     }
