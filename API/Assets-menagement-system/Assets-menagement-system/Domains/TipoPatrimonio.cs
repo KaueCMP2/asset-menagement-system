@@ -5,7 +5,7 @@ namespace Assets_menagement_system.Domains;
 
 public partial class TipoPatrimonio
 {
-    public Guid TipoAlteracaoId { get; set; }
+    public Guid TipoPatrimonioId { get; set; }
 
     public string NomeTipo { get; set; } = null!;
 
