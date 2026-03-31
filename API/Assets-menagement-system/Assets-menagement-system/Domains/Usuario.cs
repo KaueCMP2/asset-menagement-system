@@ -25,11 +25,13 @@ public partial class Usuario
 
     public Guid EnderecoId { get; set; }
 
+    public bool PrimeiroAcesso { get; set; }
+
     public virtual Endereco Endereco { get; set; } = null!;
 
     public virtual ICollection<Log_Patrimonio> Log_Patrimonio { get; set; } = new List<Log_Patrimonio>();
 
-    public virtual ICollection<SolicitacaoTranferencia> SolicitacaoTranferenciaUsuarioAprovacao { get; set; } = new List<SolicitacaoTranferencia>();
+    public virtual ICollection<SolicitacaoTransferencia> SolicitacaoTransferenciaUsuarioAprovacao { get; set; } = new List<SolicitacaoTransferencia>();
 
-    public virtual ICollection<SolicitacaoTranferencia> SolicitacaoTranferenciaUsuarioSolicitacao { get; set; } = new List<SolicitacaoTranferencia>();
+    public virtual ICollection<SolicitacaoTransferencia> SolicitacaoTransferenciaUsuarioSolicitacao { get; set; } = new List<SolicitacaoTransferencia>();
 }

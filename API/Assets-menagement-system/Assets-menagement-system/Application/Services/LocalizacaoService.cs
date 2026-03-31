@@ -50,7 +50,7 @@ namespace Assets_menagement_system.Application.Services
                 LocalizacaoId = localizacoes.LocalizacaoId,
                 NomeLocal = localizacoes.NomeLocal,
                 LocalSAP = localizacoes.LocalSAP,
-                DescricaoSAP = localizacoes.DescricaoSAP,
+                DescricaoSAP = localizacoes.DescricaoSAP, AreaId = localizacoes.
                 AreaId = localizacoes.LocalizacaoId
             };
             return localizacoesDTO;

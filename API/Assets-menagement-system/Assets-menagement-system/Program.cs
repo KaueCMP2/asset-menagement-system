@@ -38,6 +38,25 @@ builder.Services.AddScoped<BairroService>();
 builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
 builder.Services.AddScoped<EnderecoService>();
 
+// Tipo usuario
+builder.Services.AddScoped<ITipoUsuarioRepository, TipoUsuarioRepository>();
+builder.Services.AddScoped<TipoUsuarioService>();
+
+// Status patrimonio
+builder.Services.AddScoped<IStatusPatrimonioRepository, StatusPatrimonioRepository>();
+builder.Services.AddScoped<StatusPatrimonioService>();
+
+// Tipo patrimonio
+builder.Services.AddScoped<ITipoPatrimonioRepository, TipoPatrimonioRepository>();
+builder.Services.AddScoped<TipoPatrimonioService>();
+
+// Tipo Alteracao   
+builder.Services.AddScoped<ITipoAlteracaoRepository, TipoAlteracaoRepository>();
+builder.Services.AddScoped<TipoPatrimonioService>();
+
+// Usuario
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepostory>();
+builder.Services.AddScoped<UsuarioService>();
 
 // Add services to the container.
 

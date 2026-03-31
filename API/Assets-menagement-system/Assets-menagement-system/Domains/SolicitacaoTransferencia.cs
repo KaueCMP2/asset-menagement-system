@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Assets_menagement_system.Domains;
 
-public partial class SolicitacaoTranferencia
+public partial class SolicitacaoTransferencia
 {
     public Guid SolicitacaoId { get; set; }
 
@@ -27,7 +27,7 @@ public partial class SolicitacaoTranferencia
 
     public virtual Patrimonio Patrimonio { get; set; } = null!;
 
-    public virtual StatusTranferencia StatusTransferencia { get; set; } = null!;
+    public virtual StatusTransferencia StatusTransferencia { get; set; } = null!;
 
     public virtual Usuario UsuarioAprovacao { get; set; } = null!;
 

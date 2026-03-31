@@ -25,7 +25,7 @@ public partial class Patrimonio
 
     public virtual ICollection<Log_Patrimonio> Log_Patrimonio { get; set; } = new List<Log_Patrimonio>();
 
-    public virtual ICollection<SolicitacaoTranferencia> SolicitacaoTranferencia { get; set; } = new List<SolicitacaoTranferencia>();
+    public virtual ICollection<SolicitacaoTransferencia> SolicitacaoTransferencia { get; set; } = new List<SolicitacaoTransferencia>();
 
     public virtual StatusPatrimonio StatusPatrimonio { get; set; } = null!;
 

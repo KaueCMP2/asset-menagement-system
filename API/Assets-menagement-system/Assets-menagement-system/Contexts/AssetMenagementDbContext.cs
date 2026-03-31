@@ -32,11 +32,11 @@ public partial class AssetMenagementDbContext : DbContext
 
     public virtual DbSet<Patrimonio> Patrimonio { get; set; }
 
-    public virtual DbSet<SolicitacaoTranferencia> SolicitacaoTranferencia { get; set; }
+    public virtual DbSet<SolicitacaoTransferencia> SolicitacaoTransferencia { get; set; }
 
     public virtual DbSet<StatusPatrimonio> StatusPatrimonio { get; set; }
 
-    public virtual DbSet<StatusTranferencia> StatusTranferencia { get; set; }
+    public virtual DbSet<StatusTransferencia> StatusTransferencia { get; set; }
 
     public virtual DbSet<TipoAlteracao> TipoAlteracao { get; set; }
 
@@ -200,7 +200,7 @@ public partial class AssetMenagementDbContext : DbContext
                 .HasConstraintName("FK_Patrimonio_TipoPatrimonioId");
         });
 
-        modelBuilder.Entity<SolicitacaoTranferencia>(entity =>
+        modelBuilder.Entity<SolicitacaoTransferencia>(entity =>
         {
             entity.HasKey(e => e.SolicitacaoId).HasName("PK__Solicita__6E38856878194478");
 
@@ -210,27 +210,27 @@ public partial class AssetMenagementDbContext : DbContext
                 .HasPrecision(0)
                 .HasDefaultValueSql("(getdate())");
 
-            entity.HasOne(d => d.Localizacao).WithMany(p => p.SolicitacaoTranferencia)
+            entity.HasOne(d => d.Localizacao).WithMany(p => p.SolicitacaoTransferencia)
                 .HasForeignKey(d => d.LocalizacaoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SolicitacaoTranferencia_LocalizacaoId");
 
-            entity.HasOne(d => d.Patrimonio).WithMany(p => p.SolicitacaoTranferencia)
+            entity.HasOne(d => d.Patrimonio).WithMany(p => p.SolicitacaoTransferencia)
                 .HasForeignKey(d => d.PatrimonioId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SolicitacaoTranferencia_PatrimonioId");
 
-            entity.HasOne(d => d.StatusTransferencia).WithMany(p => p.SolicitacaoTranferencia)
+            entity.HasOne(d => d.StatusTransferencia).WithMany(p => p.SolicitacaoTransferencia)
                 .HasForeignKey(d => d.StatusTransferenciaId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SolicitacaoTranferencia_StatusTransferenciaId");
 
-            entity.HasOne(d => d.UsuarioAprovacao).WithMany(p => p.SolicitacaoTranferenciaUsuarioAprovacao)
+            entity.HasOne(d => d.UsuarioAprovacao).WithMany(p => p.SolicitacaoTransferenciaUsuarioAprovacao)
                 .HasForeignKey(d => d.UsuarioAprovacaoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SolicitacaoTranferencia_UsuarioAprovacaoId");
 
-            entity.HasOne(d => d.UsuarioSolicitacao).WithMany(p => p.SolicitacaoTranferenciaUsuarioSolicitacao)
+            entity.HasOne(d => d.UsuarioSolicitacao).WithMany(p => p.SolicitacaoTransferenciaUsuarioSolicitacao)
                 .HasForeignKey(d => d.UsuarioSolicitacaoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SolicitacaoTranferencia_UsuarioSolicitacaoId");
@@ -246,7 +246,7 @@ public partial class AssetMenagementDbContext : DbContext
             entity.Property(e => e.NomeStatus).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<StatusTranferencia>(entity =>
+        modelBuilder.Entity<StatusTransferencia>(entity =>
         {
             entity.HasKey(e => e.StatusTransferenciaId).HasName("PK__StatusTr__7AA828997D93DD6C");
 
@@ -270,11 +270,11 @@ public partial class AssetMenagementDbContext : DbContext
 
         modelBuilder.Entity<TipoPatrimonio>(entity =>
         {
-            entity.HasKey(e => e.TipoAlteracaoId).HasName("PK__TipoPatr__9BEF4F6D535552B2");
+            entity.HasKey(e => e.TipoPatrimonioId).HasName("PK__TipoPatr__9BEF4F6D535552B2");
 
             entity.HasIndex(e => e.NomeTipo, "UQ__TipoPatr__7859A10AC679EA63").IsUnique();
 
-            entity.Property(e => e.TipoAlteracaoId).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.TipoPatrimonioId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.NomeTipo).HasMaxLength(100);
         });
 
@@ -318,6 +318,7 @@ public partial class AssetMenagementDbContext : DbContext
             entity.Property(e => e.NomeUsuario)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.PrimeiroAcesso).HasDefaultValue(true);
             entity.Property(e => e.RG)
                 .HasMaxLength(15)
                 .IsUnicode(false);
