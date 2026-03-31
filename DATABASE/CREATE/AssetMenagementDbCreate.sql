@@ -66,9 +66,18 @@ CREATE TABLE Usuario
 	StatusUsuario			BIT DEFAULT 1,
 	PrimeiroAcesso			BIT DEFAULT 1,
 	EnderecoId				UNIQUEIDENTIFIER NOT NULL,
+	TipoUsuarioId				UNIQUEIDENTIFIER NOT NULL,
+	CargoId					UNIQUEIDENTIFIER NOT NULL,
+
 
 	CONSTRAINT FK_Usuario_UsuaroEndereco_EnderecoId	
-		FOREIGN KEY (EnderecoId) REFERENCES Endereco(EnderecoId)
+		FOREIGN KEY (EnderecoId) REFERENCES Endereco(EnderecoId),
+
+	CONSTRAINT FK_Usuario_TipoUsuario_TipoUsuarioId
+		FOREIGN KEY (TipoUsuarioId) REFERENCES TipoUsuario(TipoUsuarioId),
+
+	CONSTRAINT FK_Usuario_Cargo_CargoId
+		FOREIGN KEY (CargoId) REFERENCES Cargo(CargoId)
 )
 GO
 
@@ -125,7 +134,7 @@ CREATE TABLE Patrimonio
 		FOREIGN KEY (LocalizacaoId) REFERENCES Localizacao(LocalizacaoId),
 
 	CONSTRAINT FK_Patrimonio_TipoPatrimonioId
-		FOREIGN KEY (TipoPatrimonioId) REFERENCES TipoPatrimonio(TipoAlteracaoId),
+		FOREIGN KEY (TipoPatrimonioId) REFERENCES TipoPatrimonio(TipoPatrimonioId),
 
 	CONSTRAINT FK_Patrimonio_StatusPatrimonioId 
 		FOREIGN KEY (StatusPatrimonioId) REFERENCES StatusPatrimonio(StatusPatrimonioId) 
@@ -186,7 +195,7 @@ CREATE TABLE SolicitacaoTransferencia
 	LocalizacaoId			UNIQUEIDENTIFIER NOT NULL
 	
 	CONSTRAINT FK_SolicitacaoTranferencia_StatusTransferenciaId 
-		FOREIGN KEY (StatusTransferenciaId) REFERENCES StatusTranferencia(StatusTransferenciaId),
+		FOREIGN KEY (StatusTransferenciaId) REFERENCES StatusTransferencia(StatusTransferenciaId),
 	
 	CONSTRAINT FK_SolicitacaoTranferencia_UsuarioSolicitacaoId 
 		FOREIGN KEY (UsuarioSolicitacaoId) REFERENCES Usuario(UsuarioId),
