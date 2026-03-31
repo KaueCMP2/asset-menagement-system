@@ -64,6 +64,7 @@ CREATE TABLE Usuario
 	Senha					VARBINARY(32) NULL,
 	Email					VARCHAR(150)  NOT NULL UNIQUE,
 	StatusUsuario			BIT DEFAULT 1,
+	PrimeiroAcesso			BIT DEFAULT 1,
 	EnderecoId				UNIQUEIDENTIFIER NOT NULL,
 
 	CONSTRAINT FK_Usuario_UsuaroEndereco_EnderecoId	
@@ -165,14 +166,14 @@ CREATE TABLE Log_Patrimonio
 )
 GO
 
-CREATE TABLE StatusTranferencia 
+CREATE TABLE StatusTransferencia 
 (
 	StatusTransferenciaId	UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
 	NomeStatus				VARCHAR(50) NOT NULL UNIQUE
 )
 GO
 
-CREATE TABLE SolicitacaoTranferencia
+CREATE TABLE SolicitacaoTransferencia
 (
 	SolicitacaoId			UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY, 
 	DataSolicitacao			DATETIME2 (0) DEFAULT GETDATE(),
