@@ -8,4 +8,6 @@ public partial class TipoUsuario
     public Guid TipoUsuarioId { get; set; }
 
     public string Nome { get; set; } = null!;
+
+    public virtual ICollection<Usuario> Usuario { get; set; } = new List<Usuario>();
 }

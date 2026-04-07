@@ -1,0 +1,8 @@
+﻿namespace Assets_menagement_system.DTOs.AuthenticacaoDTO
+{
+    public class TrocarPrimeiraSenhaDTO
+    {
+        public string SenhaAtual { get; set; } = string.Empty;
+        public string NovaSenha { get; set; } = string.Empty;
+    }
+}

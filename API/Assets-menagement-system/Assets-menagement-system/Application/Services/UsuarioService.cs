@@ -25,7 +25,7 @@ namespace Assets_menagement_system.Application.Services
                 CarteiraDeTabalho = u.CarteiraDeTabalho,
                 StatusUsuario = u.StatusUsuario,
                 EnderecoId = u.EnderecoId,
-                PrimeiroAcesso = u.PrimeiroAcesso
+                PrimeiroAcesso = (bool)u.PrimeiroAcesso
             }).ToList();
         }
     }

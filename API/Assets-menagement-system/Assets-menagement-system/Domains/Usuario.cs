@@ -23,9 +23,15 @@ public partial class Usuario
 
     public bool? StatusUsuario { get; set; }
 
+    public bool? PrimeiroAcesso { get; set; }
+
     public Guid EnderecoId { get; set; }
 
-    public bool PrimeiroAcesso { get; set; }
+    public Guid TipoUsuarioId { get; set; }
+
+    public Guid CargoId { get; set; }
+
+    public virtual Cargo Cargo { get; set; } = null!;
 
     public virtual Endereco Endereco { get; set; } = null!;
 
@@ -34,4 +40,6 @@ public partial class Usuario
     public virtual ICollection<SolicitacaoTransferencia> SolicitacaoTransferenciaUsuarioAprovacao { get; set; } = new List<SolicitacaoTransferencia>();
 
     public virtual ICollection<SolicitacaoTransferencia> SolicitacaoTransferenciaUsuarioSolicitacao { get; set; } = new List<SolicitacaoTransferencia>();
+
+    public virtual TipoUsuario TipoUsuario { get; set; } = null!;
 }
