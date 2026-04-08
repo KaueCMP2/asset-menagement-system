@@ -1,69 +1,146 @@
+using Assets_menagement_system.Application.Autenticacao;
 using Assets_menagement_system.Application.Services;
 using Assets_menagement_system.Contexts;
 using Assets_menagement_system.Interfaces;
 using Assets_menagement_system.Repositories;
 using DotNetEnv;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Carregando o .env
+// carregando o .env
 Env.Load();
 
-// Acessando a connection string do .env   
+// pegando a connection string
 string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
-// Conecção com o banco de dados usando a connection string
-builder.Services.AddDbContext<AssetMenagementDbContext>(options =>
-    options.UseSqlServer(connectionString)
-);
-
-// Areas
-builder.Services.AddScoped<IAreaRepository, AreaRepository>();
-builder.Services.AddScoped<AreaService>();
-
-// Localizacao
-builder.Services.AddScoped<ILocalizacaoRepository, LocalizacaoRepository>();
-builder.Services.AddScoped<LocalizacaoService>();
-
-// Cidade 
-builder.Services.AddScoped<ICidadeRepository, CidadeRepository>();
-builder.Services.AddScoped<CidadeService>();
-
-// Bairro
-builder.Services.AddScoped<IBairroRepository, BairroRepository>();
-builder.Services.AddScoped<BairroService>();
-
-// Endereco
-builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
-builder.Services.AddScoped<EnderecoService>();
-
-// Tipo usuario
-builder.Services.AddScoped<ITipoUsuarioRepository, TipoUsuarioRepository>();
-builder.Services.AddScoped<TipoUsuarioService>();
-
-// Status patrimonio
-builder.Services.AddScoped<IStatusPatrimonioRepository, StatusPatrimonioRepository>();
-builder.Services.AddScoped<StatusPatrimonioService>();
-
-// Tipo patrimonio
-builder.Services.AddScoped<ITipoPatrimonioRepository, TipoPatrimonioRepository>();
-builder.Services.AddScoped<TipoPatrimonioService>();
-
-// Tipo Alteracao   
-builder.Services.AddScoped<ITipoAlteracaoRepository, TipoAlteracaoRepository>();
-builder.Services.AddScoped<TipoPatrimonioService>();
-
-// Usuario
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepostory>();
-builder.Services.AddScoped<UsuarioService>();
+// Conexão com banco
+builder.Services.AddDbContext<AssetMenagementDbContext>(options => options.UseSqlServer(connectionString));
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Value: Bearer TokenJWT"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
+
+//teste explicação da documentação no swagger:
+//builder.Services.AddSwaggerGen(c =>
+//{
+//    //... other Swagger options
+//    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+//    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+//    c.IncludeXmlComments(xmlPath);
+//});
+
+// Áreas
+builder.Services.AddScoped<IAreaRepository, AreaRepository>();
+builder.Services.AddScoped<AreaService>();
+
+// Localizações 
+builder.Services.AddScoped<ILocalizacaoRepository, LocalizacaoRepository>();
+builder.Services.AddScoped<LocalizacaoService>();
+
+// Cargo
+builder.Services.AddScoped<ICargoRepository, CargoRepository>();
+builder.Services.AddScoped<CargoService>();
+
+// StatusPatrimonio
+builder.Services.AddScoped<IStatusPatrimonioRepository, StatusPatrimonioRepository>();
+builder.Services.AddScoped<StatusPatrimonioService>();
+
+
+// Usuários
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepostory>();
+builder.Services.AddScoped<UsuarioService>();
+
+// LogPatrimonio
+builder.Services.AddScoped<ILogPatrimonioRepository, LogPatrimonioRepository>();
+builder.Services.AddScoped<LogPatrimonioService>();
+
+// JWT
+builder.Services.AddScoped<GeradorTokenJwt>();
+builder.Services.AddScoped<AutenticacaoService>();
+
+// Configura o sistema de autenticação da aplicação.
+// Aqui estamos dizendo que o tipo de autenticação padrão será JWT Bearer.
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+
+    // Adiciona o suporte para autenticação usando JWT.
+    .AddJwtBearer(options =>
+    {
+        // Lê a chave secreta definida no appsettings.json.
+        var chave = Environment.GetEnvironmentVariable("JWT_KEY");
+        //var chave = builder.Configuration["Jwt:Key"]!;
+
+        // Quem emitiu o token.
+        var issuer = builder.Configuration["Jwt:Issuer"]!;
+
+        // Para quem o token foi criado.
+        var audience = builder.Configuration["Jwt:Audience"]!;
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            // Verifica se o emissor do token é válido.
+            ValidateIssuer = true,
+
+            // Verifica se o destinatário do token é válido.
+            ValidateAudience = true,
+
+            // Verifica se o token ainda está válido.
+            ValidateLifetime = true,
+
+            // Verifica se a assinatura do token é válida.
+            ValidateIssuerSigningKey = true,
+
+            // Define qual emissor é considerado válido.
+            ValidIssuer = issuer,
+
+            // Define qual audience é considerado válido.
+            ValidAudience = audience,
+
+            // Define qual chave será usada para validar a assinatura do token.
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(chave)
+            ),
+
+            // o token geralmente tem 5 minutos de tolerancia, aqui colocamos para remover essa tolerancia
+            // remove tolerância extra no vencimento do token
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

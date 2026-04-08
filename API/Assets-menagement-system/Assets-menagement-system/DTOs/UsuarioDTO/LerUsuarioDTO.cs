@@ -20,6 +20,10 @@
 
         public Guid EnderecoId { get; set; }
 
+        public Guid CargoId { get; set; }
+
+        public Guid TipoUsuarioId { get; set; }
+
         public bool PrimeiroAcesso { get; set; }
 
     }

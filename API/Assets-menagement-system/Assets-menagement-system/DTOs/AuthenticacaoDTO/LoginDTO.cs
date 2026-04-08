@@ -1,4 +1,4 @@
-﻿namespace Assets_menagement_system.DTOs.AuthenticacaoDTO
+﻿namespace Assets_menagement_system.DTOs.AutenticacaoDTO
 {
     public class LoginDTO
     {

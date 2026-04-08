@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Assets_menagement_system.Application.Authenticacao
+namespace Assets_menagement_system.Application.Autenticacao
 {
     public class GeradorTokenJwt
     {

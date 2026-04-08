@@ -1,6 +1,6 @@
-﻿using Assets_menagement_system.Application.Authenticacao;
+﻿using Assets_menagement_system.Application.Autenticacao;
 using Assets_menagement_system.Application.Services;
-using Assets_menagement_system.DTOs.AuthenticacaoDTO;
+using Assets_menagement_system.DTOs.AutenticacaoDTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +10,10 @@ namespace Assets_menagement_system.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticacaoController : ControllerBase
+    public class AutenticacaoController : ControllerBase
     {
-        private readonly AuthenticacaoService _service;
-        public AuthenticacaoController(AuthenticacaoService service)
+        private readonly AutenticacaoService _service;
+        public AutenticacaoController(AutenticacaoService service)
         {
             _service = service;
         }

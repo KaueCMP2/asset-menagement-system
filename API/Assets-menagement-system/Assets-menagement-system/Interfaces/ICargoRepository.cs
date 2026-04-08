@@ -1,7 +1,6 @@
-﻿
-using Assets_menagement_system.Domains;
+﻿using Assets_menagement_system.Domains;
 
-namespace GestaoPatrimonios.Interfaces
+namespace Assets_menagement_system.Interfaces
 {
     public interface ICargoRepository
     {

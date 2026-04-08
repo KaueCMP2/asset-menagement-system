@@ -1,18 +1,18 @@
-﻿using Assets_menagement_system.Application.Authenticacao;
+﻿using Assets_menagement_system.Application.Autenticacao;
 using Assets_menagement_system.Application.Regras;
 using Assets_menagement_system.Domains;
-using Assets_menagement_system.DTOs.AuthenticacaoDTO;
+using Assets_menagement_system.DTOs.AutenticacaoDTO;
 using Assets_menagement_system.Exceptions;
 using Assets_menagement_system.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace Assets_menagement_system.Application.Services
 {
-    public class AuthenticacaoService
+    public class AutenticacaoService
     {
         private readonly GeradorTokenJwt _geradorTokenJwt;
         private readonly IUsuarioRepository _repository;
-        public AuthenticacaoService(GeradorTokenJwt geradorTokenJwt, IUsuarioRepository usuarioRepository)
+        public AutenticacaoService(GeradorTokenJwt geradorTokenJwt, IUsuarioRepository usuarioRepository)
         {
             _geradorTokenJwt = geradorTokenJwt;
             _repository = usuarioRepository;
@@ -49,8 +49,8 @@ namespace Assets_menagement_system.Application.Services
 
         public void TrocarPrimeiraSenha(Guid usuarioid, TrocarPrimeiraSenhaDTO dto)
         {
-            ValidarCriacaoDTO.ValidarSenha(dto.SenhaAtual);
-            ValidarCriacaoDTO.ValidarSenha(dto.NovaSenha);
+            Validar.ValidarSenha(dto.SenhaAtual);
+            Validar.ValidarSenha(dto.NovaSenha);
 
             Usuario usuario = _repository.BuscarPorId(usuarioid);
             if (usuario == null)

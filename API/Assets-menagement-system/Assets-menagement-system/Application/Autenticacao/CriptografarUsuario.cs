@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Assets_menagement_system.Application.Authenticacao
+namespace Assets_menagement_system.Application.Autenticacao
 {
     public class CriptografarUsuario
     {
