@@ -17,7 +17,7 @@ public partial class SolicitacaoTransferencia
 
     public Guid UsuarioSolicitacaoId { get; set; }
 
-    public Guid UsuarioAprovacaoId { get; set; }
+    public Guid? UsuarioAprovacaoId { get; set; }
 
     public Guid PatrimonioId { get; set; }
 
