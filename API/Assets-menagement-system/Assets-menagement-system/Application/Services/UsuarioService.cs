@@ -28,7 +28,7 @@ namespace Assets_menagement_system.Application.Services
                 NomeUsuario = usuario.NomeUsuario,
                 RG = usuario.RG,
                 CPF = usuario.CPF,
-                CarteiraDeTabalho = usuario.CarteiraDeTabalho,
+                CarteiraDeTrabalho = usuario.CarteiraDeTrabalho,
                 Email = usuario.Email,
                 StatusUsuario = usuario.StatusUsuario,
                 PrimeiroAcesso = (bool)usuario.PrimeiroAcesso,
@@ -56,7 +56,7 @@ namespace Assets_menagement_system.Application.Services
                 NomeUsuario = usuario.NomeUsuario,
                 RG = usuario.RG,
                 CPF = usuario.CPF,
-                CarteiraDeTabalho = usuario.CarteiraDeTabalho,
+                CarteiraDeTrabalho = usuario.CarteiraDeTrabalho,
                 Email = usuario.Email,
                 StatusUsuario = usuario.StatusUsuario,
                 PrimeiroAcesso = (bool)usuario.PrimeiroAcesso,
@@ -116,7 +116,7 @@ namespace Assets_menagement_system.Application.Services
                 NomeUsuario = dto.NomeUsuario,
                 RG = dto.RG,
                 CPF = dto.CPF,
-                CarteiraDeTabalho = dto.CarteiraDeTabalho,
+                CarteiraDeTrabalho = dto.CarteiraDeTrabalho,
                 Senha = CriptografarUsuario.CriptografarSenha(dto.NIF),
                 Email = dto.Email,
                 StatusUsuario = true,
@@ -182,7 +182,7 @@ namespace Assets_menagement_system.Application.Services
             usuarioBanco.NomeUsuario = dto.NomeUsuario;
             usuarioBanco.RG = dto.RG;
             usuarioBanco.CPF = dto.CPF;
-            usuarioBanco.CarteiraDeTabalho = dto.CarteiraDeTabalho;
+            usuarioBanco.CarteiraDeTrabalho = dto.CarteiraDeTrabalho;
             usuarioBanco.Email = dto.Email;
             usuarioBanco.EnderecoId = dto.EnderecoId;
             usuarioBanco.CargoId = dto.CargoId;

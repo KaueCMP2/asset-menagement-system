@@ -79,7 +79,7 @@ namespace Assets_menagement_system.Repositories
             usuarioBanco.NomeUsuario = usuario.NomeUsuario;
             usuarioBanco.RG = usuario.RG;
             usuarioBanco.CPF = usuario.CPF;
-            usuarioBanco.CarteiraDeTabalho = usuario.CarteiraDeTabalho;
+            usuarioBanco.CarteiraDeTrabalho = usuario.CarteiraDeTrabalho;
             usuarioBanco.Email = usuario.Email;
             usuarioBanco.EnderecoId = usuario.EnderecoId;
             usuarioBanco.CargoId = usuario.CargoId;

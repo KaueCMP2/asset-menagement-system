@@ -15,7 +15,7 @@ public partial class Usuario
 
     public string CPF { get; set; } = null!;
 
-    public string? CarteiraDeTabalho { get; set; }
+    public string? CarteiraDeTrabalho { get; set; }
 
     public byte[]? Senha { get; set; }
 

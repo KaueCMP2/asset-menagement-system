@@ -12,7 +12,7 @@
 
         public string CPF { get; set; } = null!;
 
-        public string? CarteiraDeTabalho { get; set; }
+        public string? CarteiraDeTrabalho { get; set; }
 
         public string Email { get; set; } = null!;
 
