@@ -102,6 +102,21 @@ CREATE TABLE Localizacao
 )
 GO
 
+-- Local Usuario
+CREATE TABLE LocalUsuario(
+	LocalizacaoId	UNIQUEIDENTIFIER,
+	UsuarioId		UNIQUEIDENTIFIER,
+
+	CONSTRAINT PK_LocalUsuario PRIMARY KEY (LocalizacaoId, UsuarioId),
+
+	CONSTRAINT FK_LocalUsuario_Localizacao
+		FOREIGN KEY (LocalizacaoId) REFERENCES Localizacao(LocalizacaoId),
+
+	CONSTRAINT FK_LocalUsuario_Usuario
+		FOREIGN KEY (UsuarioId) REFERENCES Usuario(UsuarioId)
+);
+GO
+
 ALTER TABLE Localizacao
 ALTER COLUMN LocalSap INT NULL
 
