@@ -24,4 +24,6 @@ public partial class Localizacao
     public virtual ICollection<Patrimonio> Patrimonio { get; set; } = new List<Patrimonio>();
 
     public virtual ICollection<SolicitacaoTransferencia> SolicitacaoTransferencia { get; set; } = new List<SolicitacaoTransferencia>();
+
+    public virtual ICollection<Usuario> Usuario { get; set; } = new List<Usuario>();
 }

@@ -47,7 +47,7 @@ namespace Assets_menagement_system.Repositories
         public bool UsuarioResponsavelDaLocalizacao(Guid usuarioId, Guid localizacaoId)
         {
             return _context.Usuario.Any(usuario => usuario.UsuarioId == usuarioId &&
-                usuario.Localizacao.Any(localizacao => localizacao.LocalizacaoID == localizacaoId)
+            usuario.Localizacao.Any(localizacao => localizacao.LocalizacaoId == localizacaoId)
             );
         }
 

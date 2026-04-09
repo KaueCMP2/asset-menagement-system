@@ -42,4 +42,6 @@ public partial class Usuario
     public virtual ICollection<SolicitacaoTransferencia> SolicitacaoTransferenciaUsuarioSolicitacao { get; set; } = new List<SolicitacaoTransferencia>();
 
     public virtual TipoUsuario TipoUsuario { get; set; } = null!;
+
+    public virtual ICollection<Localizacao> Localizacao { get; set; } = new List<Localizacao>();
 }
