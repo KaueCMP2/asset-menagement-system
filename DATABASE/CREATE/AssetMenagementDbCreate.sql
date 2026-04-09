@@ -60,7 +60,7 @@ CREATE TABLE Usuario
 	NomeUsuario				VARCHAR(50)  NOT NULL,
 	RG						VARCHAR(15)  NOT NULL UNIQUE,
 	CPF						VARCHAR(11)  NOT NULL UNIQUE,
-	CarteiraDeTabalho		VARCHAR(14),
+	CarteiraDeTrabalho		VARCHAR(14),
 	Senha					VARBINARY(32) NULL,
 	Email					VARCHAR(150)  NOT NULL UNIQUE,
 	StatusUsuario			BIT DEFAULT 1,
@@ -105,13 +105,6 @@ GO
 ALTER TABLE Localizacao
 ALTER COLUMN LocalSap INT NULL
 
-CREATE TABLE TipoPatrimonio
-(
-	TipoPatrimonioId		UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
-	NomeTipo				NVARCHAR(100) NOT NULL UNIQUE
-)
-GO
-
 CREATE TABLE StatusPatrimonio
 (
 	StatusPatrimonioId		UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
@@ -127,14 +120,10 @@ CREATE TABLE Patrimonio
 	Valor					DECIMAL(10,2) NOT NULL,
 	Imagem					VARCHAR(MAX) NULL,
 	LocalizacaoId			UNIQUEIDENTIFIER NOT NULL,
-	TipoPatrimonioId		UNIQUEIDENTIFIER NOT NULL,
 	StatusPatrimonioId		UNIQUEIDENTIFIER NOT NULL,
 
 	CONSTRAINT FK_Patrimonio_Localizacao_LocalizacaoId
 		FOREIGN KEY (LocalizacaoId) REFERENCES Localizacao(LocalizacaoId),
-
-	CONSTRAINT FK_Patrimonio_TipoPatrimonioId
-		FOREIGN KEY (TipoPatrimonioId) REFERENCES TipoPatrimonio(TipoPatrimonioId),
 
 	CONSTRAINT FK_Patrimonio_StatusPatrimonioId 
 		FOREIGN KEY (StatusPatrimonioId) REFERENCES StatusPatrimonio(StatusPatrimonioId) 

@@ -19,12 +19,6 @@ INSERT INTO Cargo (NomeCargo) VALUES
 ('Instrutor de Formação Profissional II')
 GO
 
--- TipoPatrimonio
-INSERT INTO TipoPatrimonio (NomeTipo) VALUES
-('Mesa'),
-('Notebook')
-GO
-
 -- StatusPatrimonio
 -- Inativo, Ativo, Transferido, Assis. Tecnica
 INSERT INTO StatusPatrimonio (NomeStatus) VALUES
@@ -36,7 +30,7 @@ GO
 
 -- StatusTransferencia
 -- Pendente de aprovação, Aprovado e Recusado
-INSERT INTO StatusTranferencia (NomeStatus) VALUES
+INSERT INTO StatusTransferencia (NomeStatus) VALUES
 ('Pendente de aprovação'),
 ('Aprovado'),
 ('Recusado')
