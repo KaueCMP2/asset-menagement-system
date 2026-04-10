@@ -11,17 +11,6 @@ namespace Assets_menagement_system.Application.Services
         private readonly IAreaRepository _repository;
         public AreaService(IAreaRepository repository) => _repository = repository;
 
-        private static ListarAreaDTO ListarDTO(Area area)
-        {
-            ListarAreaDTO lerDTO = new ListarAreaDTO()
-            {
-                AreaId = area.AreaId,
-                NomeArea = area.NomeArea
-            };
-
-            return lerDTO;
-        }
-
         public List<ListarAreaDTO> Listar()
         {
             List<Area> list = _repository.Listar();
@@ -33,8 +22,6 @@ namespace Assets_menagement_system.Application.Services
 
             return listarDTO;
         }
-
-
 
         public ListarAreaDTO ObterPorId(Guid guid)
         {
@@ -51,7 +38,6 @@ namespace Assets_menagement_system.Application.Services
             return areaDto;
         }
 
-
         public ListarAreaDTO ObterPorNome(string nomeArea)
         {
             Area area = _repository.ObterPorNome(nomeArea);
@@ -65,7 +51,6 @@ namespace Assets_menagement_system.Application.Services
             };
             return areaDTO;
         }
-
 
         public void Adicionar(CriarAreaDTO areaDTO)
         {
