@@ -6,7 +6,7 @@
 
         public string? Denominacao { get; set; }
 
-        public int NumeroSerie { get; set; }
+        public string NumeroSerie { get; set; }
 
         public decimal Valor { get; set; }
 

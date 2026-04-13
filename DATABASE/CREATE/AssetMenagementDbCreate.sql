@@ -131,7 +131,7 @@ CREATE TABLE Patrimonio
 (
 	PatrimonioId			UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
 	Denominacao				VARCHAR(MAX),
-	NumeroSerie				INT NOT NULL,
+	NumeroSerie				VARCHAR(20) NOT NULL,
 	Valor					DECIMAL(10,2) NOT NULL,
 	Imagem					VARCHAR(MAX) NULL,
 	LocalizacaoId			UNIQUEIDENTIFIER NOT NULL,

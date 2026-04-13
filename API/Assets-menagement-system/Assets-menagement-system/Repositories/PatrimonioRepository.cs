@@ -93,7 +93,7 @@ namespace Assets_menagement_system.Repositories
 
         public TipoAlteracao BuscarTipoAlteracaoPorNome(string nomeTipo)
         {
-            return _context.TipoAlteracao.FirstOrDefault(t => t.NomeTipoAlteracao == nomeTipo);
+            return _context.TipoAlteracao.FirstOrDefault(t => t.NomeTipoAlteracao.ToLower() == nomeTipo.ToLower());
         }
     }
 }

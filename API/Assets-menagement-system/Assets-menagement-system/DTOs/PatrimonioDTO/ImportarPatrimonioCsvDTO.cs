@@ -2,10 +2,10 @@
 {
     public class ImportarPatrimonioCsvDTO
     {
-        public int NumeroSerie { get; set; }
+        public string NumeroSerie { get; set; }
         public string Denominacao { get; set; } = string.Empty;
-        public DateTime DataImcorporacao { get; set; }
-        public decimal Valor { get; set; }
+        public string DataIncorporacao { get; set; }
+        public string Valor { get; set; }
 
         public string? Imagem { get; set; }
         public Guid LocalizacaoId { get; set; }

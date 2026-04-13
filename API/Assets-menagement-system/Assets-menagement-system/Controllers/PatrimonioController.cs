@@ -48,7 +48,7 @@ namespace Assets_menagement_system.Controllers
         {
             try
             {
-                _service.Atualizar(id, dto);
+                _service.AtualizarStatus(id, dto);
                 return NoContent();
             }
             catch (Exception ex)
