@@ -2,13 +2,11 @@
 {
     public class CriarPatrimonioDTO
     {
-        public Guid PatrimonioId { get; set; }
-
         public string? Denominacao { get; set; }
 
         public string NumeroSerie { get; set; }
 
-        public decimal Valor { get; set; }
+        public decimal? Valor { get; set; }
 
         public string? Imagem { get; set; }
 
